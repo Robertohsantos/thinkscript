@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 
 // bin/thinkscript.js
-// CLI oficial do ThinkScript - Versão 0.1
+// CLI oficial do ThinkScript - Versão 0.1 com tratamento de erros
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 import { parseThinkScript } from '../lib/thinkscript-parser.js';
-import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -18,39 +17,39 @@ const inputFile = args[1] || './examples/tarefas.think';
 const outputFile = args[2] || './dist/index.html';
 
 function help() {
-  console.log(`\n🧠 ThinkScript CLI
-
-Comandos disponíveis:
-  thinkscript build <entrada.think> <saida.html>
-  thinkscript validate <entrada.think>
-  thinkscript help
-
-Exemplos:
-  thinkscript build examples/tarefas.think dist/index.html
-  thinkscript validate examples/tarefas.think
-`);
+  console.log(`\n🧠 ThinkScript CLI\n\nComandos disponíveis:\n  thinkscript build <entrada.think> <saida.html>\n  thinkscript validate <entrada.think>\n  thinkscript help\n\nExemplos:\n  thinkscript build examples/tarefas.think dist/index.html\n  thinkscript validate examples/tarefas.think\n`);
 }
 
 function validate(file) {
-  const source = fs.readFileSync(file, 'utf8');
-  const parsed = parseThinkScript(source);
-  console.log('✅ Arquivo válido:', file);
-  console.log('  App:', parsed.app?.nome);
-  console.log('  Entidades:', Array.isArray(parsed.entidade) ? parsed.entidade.length : 1);
-  console.log('  Telas:', parsed.interface?.length || 0);
+  try {
+    const source = fs.readFileSync(file, 'utf8');
+    const parsed = parseThinkScript(source);
+    console.log('✅ Arquivo válido:', file);
+    console.log('  App:', parsed.app?.nome);
+    console.log('  Entidades:', Array.isArray(parsed.entidade) ? parsed.entidade.length : 1);
+    console.log('  Telas:', parsed.interface?.length || 0);
+  } catch (err) {
+    console.error('❌ Erro na validação:', err.message);
+    process.exit(1);
+  }
 }
 
 function build(file, output) {
-  const source = fs.readFileSync(file, 'utf8');
-  const parsed = parseThinkScript(source);
+  try {
+    const source = fs.readFileSync(file, 'utf8');
+    const parsed = parseThinkScript(source);
 
-  const entidades = Array.isArray(parsed.entidade) ? parsed.entidade : [parsed.entidade];
-  const entidadeMap = Object.fromEntries(entidades.map(e => [e.nome, e]));
+    const entidades = Array.isArray(parsed.entidade) ? parsed.entidade : [parsed.entidade];
+    const entidadeMap = Object.fromEntries(entidades.map(e => [e.nome, e]));
 
-  const html = generateApp(parsed.app, entidades, parsed.interface, entidadeMap);
-  fs.mkdirSync(path.dirname(output), { recursive: true });
-  fs.writeFileSync(output, html);
-  console.log('✅ App gerado com sucesso:', output);
+    const html = generateApp(parsed.app, entidades, parsed.interface, entidadeMap);
+    fs.mkdirSync(path.dirname(output), { recursive: true });
+    fs.writeFileSync(output, html);
+    console.log('✅ App gerado com sucesso:', output);
+  } catch (err) {
+    console.error('❌ Erro ao gerar o app:', err.message);
+    process.exit(1);
+  }
 }
 
 function generateApp(app, entidades, interfaces, entidadeMap) {
