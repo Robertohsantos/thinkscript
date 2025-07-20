@@ -57,6 +57,7 @@ ThinkScript foi projetada para:
 - Geração de interfaces baseadas em tela
 - Filtros, ordenação e ações padronizadas (CRUD)
 - Múltiplas telas e múltiplas entidades em um único arquivo
+- Relacionamentos entre entidades com filtros encadeados
 - Expansão futura com comportamentos, eventos e persistência
 
 ---
@@ -97,6 +98,23 @@ Resultado: arquivo HTML gerado em `./dist/index.html`
 
 ---
 
+## 🔗 Suporte a relacionamentos (v0.2)
+
+O arquivo `lib/multi-entity-with-relations.js` suporta o novo bloco `relacionamentos`, permitindo conexões como:
+- "cliente tem muitos pedidos"
+- "pedido contém produtos"
+
+Essas relações geram automaticamente **filtros em cascata** entre entidades relacionadas.
+
+### Como gerar:
+```bash
+node lib/multi-entity-with-relations.js
+```
+
+✔️ Filtros dinâmicos são adicionados automaticamente às telas de destino, baseando-se no campo `via` definido no relacionamento.
+
+---
+
 ## 🛠️ Uso da CLI ThinkScript
 
 A CLI oficial está localizada em `bin/thinkscript.js`. Ela permite validar arquivos `.think` e gerar apps a partir deles diretamente via terminal.
@@ -122,21 +140,22 @@ node bin/thinkscript.js validate examples/tarefas.think
 ## 🗂️ Repositório
 - `examples/tarefas.think` – exemplo básico de tarefa com filtros e estatísticas
 - `examples/clientes-produtos.think` – exemplo de múltiplas entidades com telas separadas
-- `lib/` – parser e interpretadores (simples, multi-tela e multi-entidade)
+- `lib/` – parser e interpretadores (simples, multi-tela, multi-entidade e com relacionamentos)
 - `bin/` – CLI oficial com comandos build, validate e help
 - `docs/spec.md` – especificação oficial da linguagem
+- `docs/relationships.md` – extensão v0.2 para suporte a relacionamentos
 - `playground/` – playground visual local para rodar apps declarativos
 
 ---
 
 ## 📅 Status
-Versão atual: `v0.1`
-- Estável para protótipos
-- Parser funcional já disponível
+Versão atual: `v0.2`
+- Estável para múltiplas entidades e telas
+- Parser funcional com validação
 - Geração automática de código ativa
 - Playground local funcionando
-- Interpretação com múltiplas entidades e telas disponível
-- CLI funcional com tratamento de erro e mensagens claras
+- CLI robusta com tratamento de erro
+- Relacionamentos suportados e operacionais
 
 ---
 
