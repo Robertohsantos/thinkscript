@@ -7,7 +7,6 @@
 ---
 
 ## 🔖 Exemplo de um app
-
 ```yaml
 app:
   nome: "Lista de Tarefas"
@@ -46,50 +45,62 @@ interface:
 ---
 
 ## 📊 Visão Geral
-
 ThinkScript foi projetada para:
-
-* Ser lida e gerada por humanos **ou IA**
-* Servir como interface de entrada para **app builders assistidos por IA**
-* Ser interpretada ou convertida em HTML/JS automaticamente
+- Ser lida e gerada por humanos **ou IA**
+- Servir como interface de entrada para **app builders assistidos por IA**
+- Ser interpretada ou convertida em HTML/JS automaticamente
 
 ---
 
 ## 🚀 Recursos
-
-* Declaração de entidades e campos (semelhança com bancos de dados)
-* Geração de interfaces baseadas em tela
-* Filtros, ordenação e ações padronizadas (CRUD)
-* Expansão futura com comportamentos, eventos e persistência
-
----
-
-## 🔧 Repositório
-
-* `examples/` - exemplos reais em .think
-* `lib/` - parser ThinkScript (converte .think para JSON)
-* `docs/spec.md` - especificação oficial da linguagem
+- Declaração de entidades e campos (semelhança com bancos de dados)
+- Geração de interfaces baseadas em tela
+- Filtros, ordenação e ações padronizadas (CRUD)
+- Expansão futura com comportamentos, eventos e persistência
 
 ---
 
-## 📆 Status
+## 🧪 Playground Local
 
+Você pode testar a linguagem ThinkScript direto no seu navegador, sem IA, sem backend, com o arquivo:
+
+```
+playground/playground.html
+```
+
+### Como usar:
+1. Abra o arquivo em um navegador moderno (ex: Chrome ou Edge)
+2. Escreva ou cole um código `.think` na área à esquerda
+3. Clique em “Gerar App”
+4. Veja a aplicação renderizada ao vivo na área à direita
+
+✔️ Nenhuma instalação é necessária. Roda 100% offline.
+
+---
+
+## 🗂️ Repositório
+- `examples/` - exemplos reais em .think
+- `lib/` - parser ThinkScript (converte .think para JSON)
+- `docs/spec.md` - especificação oficial da linguagem
+- `playground/` - playground visual local para rodar apps declarativos
+
+---
+
+## 📅 Status
 Versão atual: `v0.1`
-
-* Estável para protótipos
-* Parser funcional já disponível
-* Geração automática de código em progresso
+- Estável para protótipos
+- Parser funcional já disponível
+- Geração automática de código em progresso
+- Playground local funcionando
 
 ---
 
 ## ✨ Licença
-
 MIT
 
 ---
 
 ## ✉️ Contato
-
 Criado por Roberto Santos. Orientado e mantido por IA (OpenAI GPT-4o)
 
 ---
