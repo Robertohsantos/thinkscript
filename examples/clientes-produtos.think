@@ -1,0 +1,23 @@
+app:
+  nome: "Cadastro de Clientes e Produtos"
+  objetivo: "Gerenciar duas entidades em telas separadas"
+
+entidade:
+  - nome: "cliente"
+    campos:
+      - nome: texto
+      - email: texto
+      - telefone: texto
+
+  - nome: "produto"
+    campos:
+      - nome: texto
+      - preco: numero
+      - estoque: numero
+
+interface:
+  - tela: "Cadastro de Clientes"
+    mostra: cliente[]
+
+  - tela: "Catálogo de Produtos"
+    mostra: produto[]
