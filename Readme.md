@@ -97,10 +97,33 @@ Resultado: arquivo HTML gerado em `./dist/index.html`
 
 ---
 
+## 🛠️ Uso da CLI ThinkScript
+
+A CLI oficial está localizada em `bin/thinkscript.js`. Ela permite validar arquivos `.think` e gerar apps a partir deles diretamente via terminal.
+
+### Comandos disponíveis:
+
+```bash
+thinkscript build <entrada.think> <saida.html>
+thinkscript validate <entrada.think>
+thinkscript help
+```
+
+### Exemplos:
+```bash
+node bin/thinkscript.js build examples/clientes-produtos.think dist/index.html
+node bin/thinkscript.js validate examples/tarefas.think
+```
+
+✔️ Agora com tratamento de erros e mensagens amigáveis via `try/catch`.
+
+---
+
 ## 🗂️ Repositório
 - `examples/tarefas.think` – exemplo básico de tarefa com filtros e estatísticas
 - `examples/clientes-produtos.think` – exemplo de múltiplas entidades com telas separadas
 - `lib/` – parser e interpretadores (simples, multi-tela e multi-entidade)
+- `bin/` – CLI oficial com comandos build, validate e help
 - `docs/spec.md` – especificação oficial da linguagem
 - `playground/` – playground visual local para rodar apps declarativos
 
@@ -113,6 +136,7 @@ Versão atual: `v0.1`
 - Geração automática de código ativa
 - Playground local funcionando
 - Interpretação com múltiplas entidades e telas disponível
+- CLI funcional com tratamento de erro e mensagens claras
 
 ---
 
