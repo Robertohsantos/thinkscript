@@ -78,9 +78,27 @@ playground/playground.html
 
 ---
 
+## 🧩 Interpretação com múltiplas telas
+
+O arquivo `lib/multi-screen-generator.js` permite gerar aplicações com múltiplas telas declaradas em ThinkScript. Cada `tela` é transformada em uma seção com navegação, formulário e listagem de dados.
+
+✔️ O app gerado inclui:
+- Navegação entre telas via botões
+- Formulários automáticos com base na entidade
+- Listas que refletem os dados inseridos
+- Código HTML/JS puro, executável localmente (SPA leve)
+
+### Como gerar:
+```bash
+node lib/multi-screen-generator.js
+```
+Resultado: arquivo HTML gerado em `./dist/index.html`
+
+---
+
 ## 🗂️ Repositório
 - `examples/` - exemplos reais em .think
-- `lib/` - parser ThinkScript (converte .think para JSON)
+- `lib/` - parser e interpretadores (simples e multi-tela)
 - `docs/spec.md` - especificação oficial da linguagem
 - `playground/` - playground visual local para rodar apps declarativos
 
@@ -90,8 +108,9 @@ playground/playground.html
 Versão atual: `v0.1`
 - Estável para protótipos
 - Parser funcional já disponível
-- Geração automática de código em progresso
+- Geração automática de código ativa
 - Playground local funcionando
+- Interpretação com múltiplas telas disponível
 
 ---
 
