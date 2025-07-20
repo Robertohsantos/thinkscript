@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>ThinkScript Playground</title>
+  <style>
+    body { font-family: sans-serif; display: flex; height: 100vh; margin: 0; }
+    textarea { width: 50%; height: 100%; padding: 1rem; font-family: monospace; font-size: 14px; border: none; border-right: 1px solid #ccc; box-sizing: border-box; }
+    iframe { flex: 1; border: none; height: 100%; }
+    #controls { position: absolute; top: 1rem; left: 52%; z-index: 10; }
+    button { padding: 10px 16px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <textarea id="editor" placeholder="Cole aqui seu .think YAML..."></textarea>
+  <div id="controls">
+    <button onclick="gerarApp()">Gerar App</button>
+  </div>
+  <iframe id="preview"></iframe>
+
+  <script type="module">
+    import { parseThinkScript } from './lib/thinkscript-parser.js';
+    import yaml from 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm';
+
+    async function gerarApp() {
+      const source = document.getElementById('editor').value;
+      try {
+        const parsed = parseThinkScript(source, yaml);
+        const html = generateHTML(parsed);
+        const preview = document.getElementById('preview');
+        const blob = new Blob([html], { type: 'text/html' });
+        preview.src = URL.createObjectURL(blob);
+      } catch (err) {
+        alert("Erro ao gerar o app: " + err.message);
+      }
+    }
+
+    function generateHTML({ app, entidade }) {
+      const campos = entidade.campos.map(c => Object.keys(c)[0]);
+      const htmlFormInputs = campos.map(campo => `
+        <label>${campo}:<input name="${campo}" type="text" /></label>`).join('<br/>');
+
+      return `<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<title>${app.nome}</title>
+<style>body{font-family:sans-serif;padding:2rem}input,button{margin:4px}</style></head>
+<body>
+<h1>${app.nome}</h1>
+<form id="form">${htmlFormInputs}<br/><button>Adicionar</button></form>
+<ul id="lista"></ul>
+<script>
+  const form = document.getElementById('form');
+  const lista = document.getElementById('lista');
+  const tarefas = [];
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const dados = Object.fromEntries(new FormData(form));
+    tarefas.push(dados);
+    form.reset();
+    render();
+  });
+  function render() {
+    lista.innerHTML = '';
+    tarefas.forEach((t, i) => {
+      const li = document.createElement('li');
+      li.innerText = t.descricao || JSON.stringify(t);
+      lista.appendChild(li);
+    });
+  }
+</script></body></html>`;
+    }
+
+    // Adapta o parser para funcionar com módulo via CDN
+    function parseThinkScript(source, yaml) {
+      const parsed = yaml.load(source);
+      if (!parsed.app || !parsed.entidade || !parsed.interface) {
+        throw new Error("Arquivo ThinkScript incompleto: requer app, entidade e interface.");
+      }
+      return parsed;
+    }
+  </script>
+</body>
+</html>
