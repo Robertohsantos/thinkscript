@@ -56,6 +56,7 @@ ThinkScript foi projetada para:
 - Declaração de entidades e campos (semelhança com bancos de dados)
 - Geração de interfaces baseadas em tela
 - Filtros, ordenação e ações padronizadas (CRUD)
+- Múltiplas telas e múltiplas entidades em um único arquivo
 - Expansão futura com comportamentos, eventos e persistência
 
 ---
@@ -78,29 +79,30 @@ playground/playground.html
 
 ---
 
-## 🧩 Interpretação com múltiplas telas
+## 🧩 Interpretação com múltiplas telas e entidades
 
-O arquivo `lib/multi-screen-generator.js` permite gerar aplicações com múltiplas telas declaradas em ThinkScript. Cada `tela` é transformada em uma seção com navegação, formulário e listagem de dados.
+O arquivo `lib/multi-entity-generator.js` permite gerar aplicações com múltiplas entidades e múltiplas telas declaradas em ThinkScript. Cada `tela` é transformada em uma seção com navegação, formulário e listagem de dados. O sistema identifica automaticamente qual entidade corresponde à tela.
 
 ✔️ O app gerado inclui:
 - Navegação entre telas via botões
-- Formulários automáticos com base na entidade
-- Listas que refletem os dados inseridos
+- Formulários automáticos com base em cada entidade
+- Listas de dados independentes por tipo
 - Código HTML/JS puro, executável localmente (SPA leve)
 
 ### Como gerar:
 ```bash
-node lib/multi-screen-generator.js
+node lib/multi-entity-generator.js
 ```
 Resultado: arquivo HTML gerado em `./dist/index.html`
 
 ---
 
 ## 🗂️ Repositório
-- `examples/` - exemplos reais em .think
-- `lib/` - parser e interpretadores (simples e multi-tela)
-- `docs/spec.md` - especificação oficial da linguagem
-- `playground/` - playground visual local para rodar apps declarativos
+- `examples/tarefas.think` – exemplo básico de tarefa com filtros e estatísticas
+- `examples/clientes-produtos.think` – exemplo de múltiplas entidades com telas separadas
+- `lib/` – parser e interpretadores (simples, multi-tela e multi-entidade)
+- `docs/spec.md` – especificação oficial da linguagem
+- `playground/` – playground visual local para rodar apps declarativos
 
 ---
 
@@ -110,7 +112,7 @@ Versão atual: `v0.1`
 - Parser funcional já disponível
 - Geração automática de código ativa
 - Playground local funcionando
-- Interpretação com múltiplas telas disponível
+- Interpretação com múltiplas entidades e telas disponível
 
 ---
 
