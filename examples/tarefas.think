@@ -1,0 +1,34 @@
+app:
+  nome: "Lista de Tarefas"
+  objetivo: "Gerenciar tarefas com categorias, datas e relatórios"
+
+entidade:
+  nome: "tarefa"
+  campos:
+    - descricao: texto
+    - categoria: ["Pessoal", "Trabalho", "Estudos"]
+    - data_limite: data
+    - status: ["pendente", "concluída"]
+    - observacoes: texto_longo
+
+interface:
+  - tela: "Lista de Tarefas"
+    mostra: tarefa[]
+    filtros:
+      - categoria
+      - status
+    acoes:
+      - adicionar nova tarefa
+      - editar tarefa
+      - excluir tarefa
+      - marcar como concluída
+    ordenacao:
+      - por: data_limite
+        ordem: crescente
+
+  - tela: "Estatísticas"
+    mostra:
+      - total_tarefas
+      - total_concluidas
+      - total_pendentes
+      - grafico_tarefas_por_categoria
