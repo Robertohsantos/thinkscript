@@ -1,0 +1,45 @@
+app:
+  nome: "Sistema de Vendas"
+  objetivo: "Gerenciar clientes, pedidos e produtos"
+
+entidade:
+  - nome: cliente
+    campos:
+      - id: texto
+      - nome: texto
+      - cidade: texto
+
+  - nome: pedido
+    campos:
+      - id: texto
+      - cliente_id: texto
+      - valor_total: número
+      - status: ["pendente", "pago"]
+
+  - nome: produto
+    campos:
+      - id: texto
+      - nome: texto
+      - preco: número
+
+interface:
+  - tela: "Clientes"
+    mostra: cliente[]
+    filtros:
+      - nome
+      - cidade
+
+  - tela: "Pedidos"
+    mostra: pedido[]
+    filtros:
+      - status
+
+  - tela: "Produtos"
+    mostra: produto[]
+    filtros:
+      - nome
+
+relacionamentos:
+  - de: cliente
+    para: pedido
+    via: cliente_id
