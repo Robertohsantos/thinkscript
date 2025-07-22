@@ -58,8 +58,12 @@ ThinkScript foi projetada para:
 - Filtros, ordenação e ações padronizadas (CRUD)
 - Múltiplas telas e múltiplas entidades em um único arquivo
 - Relacionamentos entre entidades com filtros encadeados
-- Navegação encadeada automática entre telas relacionadas (v0.4)
-- Expansão futura com comportamentos, eventos e persistência
+- Navegação encadeada automática entre telas relacionadas (v0.4+)
+- Persistência local com `localStorage` (v0.4+)
+- Edição e exclusão de registros (CRUD completo, v0.5+)
+- Filtros declarados por campo (v0.6)
+- Visual aprimorado com tabelas (v0.6)
+- Exportação e importação JSON de dados (v0.6)
 
 ---
 
@@ -81,57 +85,33 @@ playground/playground.html
 
 ---
 
-## 🧩 Interpretação com múltiplas telas e entidades
+## 🧩 Interpretadores
 
-O arquivo `lib/multi-entity-generator.js` permite gerar aplicações com múltiplas entidades e múltiplas telas declaradas em ThinkScript. Cada `tela` é transformada em uma seção com navegação, formulário e listagem de dados. O sistema identifica automaticamente qual entidade corresponde à tela.
-
-✔️ O app gerado inclui:
-- Navegação entre telas via botões
-- Formulários automáticos com base em cada entidade
-- Listas de dados independentes por tipo
-- Código HTML/JS puro, executável localmente (SPA leve)
-
-### Como gerar:
+### `lib/multi-entity-generator.js`
+Suporte a múltiplas entidades e múltiplas telas declaradas.
 ```bash
 node lib/multi-entity-generator.js
 ```
-Resultado: arquivo HTML gerado em `./dist/index.html`
 
----
-
-## 🔗 Suporte a relacionamentos (v0.2)
-
-O arquivo `lib/multi-entity-with-relations.js` suporta o novo bloco `relacionamentos`, permitindo conexões como:
-- "cliente tem muitos pedidos"
-- "pedido contém produtos"
-
-Essas relações geram automaticamente **filtros em cascata** entre entidades relacionadas.
-
-### Como gerar:
+### `lib/multi-entity-with-relations.js`
+Suporte ao bloco `relacionamentos`, com filtros dinâmicos entre entidades.
 ```bash
 node lib/multi-entity-with-relations.js
 ```
 
-✔️ Filtros dinâmicos são adicionados automaticamente às telas de destino, baseando-se no campo `via` definido no relacionamento.
+### `lib/multi-entity-with-navigation.js` (v0.6)
+Interpretador mais completo:
+- Navegação entre entidades
+- Filtros automáticos e declarados
+- CRUD completo
+- Exportação/Importação de dados
+- Tabelas estilizadas
 
----
-
-## 🔄 Suporte à navegação encadeada (v0.4)
-
-O interpretador `multi-entity-with-navigation.js` é a versão mais avançada atualmente.
-
-### Recursos inclusos:
-- Navegação automática entre telas relacionadas (cliente → pedidos, etc)
-- Filtros dinâmicos com base em relacionamentos
-- Persistência dos dados no navegador com `localStorage`
-- Totalmente declarativo, a partir do bloco `relacionamentos`
-
-### Como gerar:
 ```bash
 node lib/multi-entity-with-navigation.js
 ```
 
-Resultado: app interativo gerado em `./dist/index.html`
+Resultado: app gerado em `./dist/index.html`
 
 ---
 
@@ -140,7 +120,6 @@ Resultado: app interativo gerado em `./dist/index.html`
 A CLI oficial está localizada em `bin/thinkscript.js`. Ela permite validar arquivos `.think` e gerar apps a partir deles diretamente via terminal.
 
 ### Comandos disponíveis:
-
 ```bash
 thinkscript build <entrada.think> <saida.html>
 thinkscript validate <entrada.think>
@@ -153,28 +132,23 @@ node bin/thinkscript.js build examples/clientes-produtos.think dist/index.html
 node bin/thinkscript.js validate examples/tarefas.think
 ```
 
-✔️ Agora com tratamento de erros e mensagens amigáveis via `try/catch`.
-
 ---
 
 ## 🗂️ Repositório
-- `examples/tarefas.think` – exemplo básico de tarefa com filtros e estatísticas
-- `examples/clientes-produtos.think` – exemplo de múltiplas entidades com telas separadas
-- `lib/` – parser e interpretadores (simples, multi-tela, multi-entidade, relacionamentos e navegação)
-- `bin/` – CLI oficial com comandos build, validate e help
-- `docs/spec.md` – especificação oficial da linguagem
-- `docs/relationships.md` – extensão v0.2 para suporte a relacionamentos
-- `playground/` – playground visual local para rodar apps declarativos
+- `examples/tarefas.think` – exemplo básico com filtros e estatísticas
+- `examples/clientes-produtos.think` – múltiplas entidades com relações
+- `lib/` – interpretadores e parser
+- `bin/` – CLI oficial
+- `docs/spec.md` – especificação da linguagem
+- `playground/` – ambiente visual de testes
 
 ---
 
 ## 📅 Status
-Versão atual: `v0.4`
-- Estável para múltiplas entidades, relacionamentos e navegação
-- Parser funcional com validação
-- Geração automática de código ativa
-- Playground local funcionando
-- CLI robusta com tratamento de erro
+Versão atual: `v0.6`
+- Estável, funcional e com persistência
+- Compatível com IA assistida
+- Pronto para uso no Replit ou embarcado em editores
 
 ---
 
