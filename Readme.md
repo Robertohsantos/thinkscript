@@ -58,6 +58,7 @@ ThinkScript foi projetada para:
 - Filtros, ordenação e ações padronizadas (CRUD)
 - Múltiplas telas e múltiplas entidades em um único arquivo
 - Relacionamentos entre entidades com filtros encadeados
+- Navegação encadeada automática entre telas relacionadas (v0.4)
 - Expansão futura com comportamentos, eventos e persistência
 
 ---
@@ -115,6 +116,25 @@ node lib/multi-entity-with-relations.js
 
 ---
 
+## 🔄 Suporte à navegação encadeada (v0.4)
+
+O interpretador `multi-entity-with-navigation.js` é a versão mais avançada atualmente.
+
+### Recursos inclusos:
+- Navegação automática entre telas relacionadas (cliente → pedidos, etc)
+- Filtros dinâmicos com base em relacionamentos
+- Persistência dos dados no navegador com `localStorage`
+- Totalmente declarativo, a partir do bloco `relacionamentos`
+
+### Como gerar:
+```bash
+node lib/multi-entity-with-navigation.js
+```
+
+Resultado: app interativo gerado em `./dist/index.html`
+
+---
+
 ## 🛠️ Uso da CLI ThinkScript
 
 A CLI oficial está localizada em `bin/thinkscript.js`. Ela permite validar arquivos `.think` e gerar apps a partir deles diretamente via terminal.
@@ -140,7 +160,7 @@ node bin/thinkscript.js validate examples/tarefas.think
 ## 🗂️ Repositório
 - `examples/tarefas.think` – exemplo básico de tarefa com filtros e estatísticas
 - `examples/clientes-produtos.think` – exemplo de múltiplas entidades com telas separadas
-- `lib/` – parser e interpretadores (simples, multi-tela, multi-entidade e com relacionamentos)
+- `lib/` – parser e interpretadores (simples, multi-tela, multi-entidade, relacionamentos e navegação)
 - `bin/` – CLI oficial com comandos build, validate e help
 - `docs/spec.md` – especificação oficial da linguagem
 - `docs/relationships.md` – extensão v0.2 para suporte a relacionamentos
@@ -149,13 +169,12 @@ node bin/thinkscript.js validate examples/tarefas.think
 ---
 
 ## 📅 Status
-Versão atual: `v0.2`
-- Estável para múltiplas entidades e telas
+Versão atual: `v0.4`
+- Estável para múltiplas entidades, relacionamentos e navegação
 - Parser funcional com validação
 - Geração automática de código ativa
 - Playground local funcionando
 - CLI robusta com tratamento de erro
-- Relacionamentos suportados e operacionais
 
 ---
 
